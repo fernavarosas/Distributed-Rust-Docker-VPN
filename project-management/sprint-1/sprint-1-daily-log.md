@@ -19,3 +19,4 @@
 - Se clonó correctamente la VM base `coord-01` para crear `worker-01` y `worker-02`.
 - Se corrigieron hostnames y el archivo `/etc/hosts` en ambos clones.
 - Se verificó conectividad básica, SSH activo y operación correcta por NAT.
+- Se dejó lista la infraestructura local inicial para comenzar el bloque de ZeroTier.
