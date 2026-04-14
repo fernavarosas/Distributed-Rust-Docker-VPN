@@ -62,3 +62,11 @@
 - Cada worker calcula una porción real del conjunto de Mandelbrot con resolución 800x800.
 - El coordinador recibe e integra los bloques devueltos por los workers.
 - Se añadió generación de un archivo final consolidado `mandelbrot_result.txt`.
+
+## Avance: integración completa del resultado final
+
+- Se completó la ejecución distribuida final del algoritmo Mandelbrot.
+- El coordinador recibió correctamente los 8 bloques esperados de los workers.
+- Cada worker procesó un rango distinto de 100 filas sobre una resolución total de 800x800.
+- Al alcanzar 8/8 bloques recibidos, el coordinador integró los resultados en memoria y generó el archivo final `mandelbrot_result.txt`.
+- Con ello quedó validada la ejecución final del sistema distribuido sobre ZeroTier, Docker y Rust.

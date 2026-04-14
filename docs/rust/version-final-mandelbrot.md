@@ -25,3 +25,16 @@ Implementar una versión final funcional del sistema distribuido de Mandelbrot u
 ## Resultado
 
 El coordinador recibe los ocho bloques, los integra en memoria y genera un archivo final `mandelbrot_result.txt`.
+
+## Resultado final de la ejecución distribuida
+
+Se completó la ejecución distribuida final del algoritmo Mandelbrot con 1 coordinador y 8 workers.
+
+El coordinador recibió los 8 bloques esperados, integró los resultados y generó el archivo `mandelbrot_result.txt`.
+
+Metadatos del resultado:
+
+- width=800
+- height=800
+- max_iter=1000
+- total_pixels=640000
