@@ -53,3 +53,8 @@ Metadatos del resultado:
 ### Total de pixeles generados:
 
 ![Total de pixeles generados](../assets/img/total_pixels.png)
+
+## Archivos de evidencia
+
+- [Log completo del coordinador](../assets/files/coordinator.log)
+- [Archivo final generado por el sistema](../assets/files/mandelbrot_result.txt)
