@@ -1,6 +1,17 @@
 use crate::protocol::{AckMessage, RegisterMessage, ResultMessage, TaskMessage};
+use std::collections::HashMap;
+use std::fs::File;
 use std::io::{BufRead, BufReader, Write};
 use std::net::{TcpListener, TcpStream};
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+const WIDTH: u32 = 800;
+const HEIGHT: u32 = 800;
+const MAX_ITER: u32 = 1000;
+const TOTAL_WORKERS: usize = 8;
+
+type SharedResults = Arc<Mutex<HashMap<String, ResultMessage>>>;
 
 pub fn run() {
     let addr = "0.0.0.0:9000";
@@ -8,11 +19,17 @@ pub fn run() {
 
     println!("Coordinador escuchando en {}", addr);
 
+    let results: SharedResults = Arc::new(Mutex::new(HashMap::new()));
+
     for stream in listener.incoming() {
         match stream {
             Ok(stream) => {
-                println!("Nueva conexión recibida");
-                handle_client(stream);
+                let results_clone = Arc::clone(&results);
+
+                thread::spawn(move || {
+                    println!("Nueva conexión recibida");
+                    handle_client(stream, results_clone);
+                });
             }
             Err(e) => {
                 eprintln!("Error aceptando conexión: {}", e);
@@ -21,7 +38,7 @@ pub fn run() {
     }
 }
 
-fn handle_client(mut stream: TcpStream) {
+fn handle_client(mut stream: TcpStream, results: SharedResults) {
     let mut reader = BufReader::new(stream.try_clone().expect("No se pudo clonar stream"));
     let mut line = String::new();
 
@@ -52,14 +69,16 @@ fn handle_client(mut stream: TcpStream) {
 
                     println!("ACK enviado");
 
+                    let (start_row, end_row) = assign_rows(&msg.worker_id);
+
                     let task = TaskMessage {
                         r#type: "task".to_string(),
-                        task_id: 1,
-                        start_row: 0,
-                        end_row: 9,
-                        width: 10,
-                        height: 10,
-                        max_iter: 100,
+                        task_id: extract_worker_number(&msg.worker_id),
+                        start_row,
+                        end_row,
+                        width: WIDTH,
+                        height: HEIGHT,
+                        max_iter: MAX_ITER,
                         x_min: -2.0,
                         x_max: 1.0,
                         y_min: -1.5,
@@ -73,14 +92,17 @@ fn handle_client(mut stream: TcpStream) {
                         .write_all(format!("{}\n", task_json).as_bytes())
                         .expect("No se pudo enviar task");
 
-                    println!("TASK enviada");
+                    println!(
+                        "TASK enviada a {} para filas {}-{}",
+                        msg.worker_id, start_row, end_row
+                    );
 
                     let mut result_line = String::new();
                     reader
                         .read_line(&mut result_line)
                         .expect("No se pudo leer resultado");
 
-                    println!("Resultado recibido: {}", result_line.trim());
+                    println!("Resultado recibido de {}", msg.worker_id);
 
                     let result: Result<ResultMessage, _> =
                         serde_json::from_str(result_line.trim());
@@ -92,6 +114,18 @@ fn handle_client(mut stream: TcpStream) {
                                 res.worker_id, res.start_row, res.end_row
                             );
                             println!("Cantidad de pixeles recibidos: {}", res.pixels.len());
+
+                            {
+                                let mut map = results.lock().expect("No se pudo bloquear results");
+                                map.insert(res.worker_id.clone(), res);
+
+                                println!("Bloques recibidos hasta ahora: {}/{}", map.len(), TOTAL_WORKERS);
+
+                                if map.len() == TOTAL_WORKERS {
+                                    println!("Todos los bloques fueron recibidos. Integrando resultado final...");
+                                    write_final_output(&map);
+                                }
+                            }
                         }
                         Err(e) => {
                             eprintln!("No se pudo parsear result: {}", e);
@@ -107,4 +141,45 @@ fn handle_client(mut stream: TcpStream) {
             eprintln!("Error leyendo del worker: {}", e);
         }
     }
+}
+
+fn extract_worker_number(worker_id: &str) -> u32 {
+    worker_id
+        .split('-')
+        .last()
+        .unwrap_or("1")
+        .parse::<u32>()
+        .unwrap_or(1)
+}
+
+fn assign_rows(worker_id: &str) -> (u32, u32) {
+    let worker_number = extract_worker_number(worker_id);
+
+    let rows_per_worker = 100;
+    let start_row = (worker_number - 1) * rows_per_worker;
+    let end_row = start_row + rows_per_worker - 1;
+
+    (start_row, end_row)
+}
+
+fn write_final_output(results: &HashMap<String, ResultMessage>) {
+    let mut ordered_results: Vec<&ResultMessage> = results.values().collect();
+    ordered_results.sort_by_key(|r| r.start_row);
+
+    let mut final_pixels: Vec<u32> = Vec::new();
+
+    for result in ordered_results {
+        final_pixels.extend_from_slice(&result.pixels);
+    }
+
+    let mut file = File::create("mandelbrot_result.txt")
+        .expect("No se pudo crear el archivo de salida");
+
+    writeln!(file, "width={}", WIDTH).unwrap();
+    writeln!(file, "height={}", HEIGHT).unwrap();
+    writeln!(file, "max_iter={}", MAX_ITER).unwrap();
+    writeln!(file, "total_pixels={}", final_pixels.len()).unwrap();
+    writeln!(file, "pixels={:?}", final_pixels).unwrap();
+
+    println!("Archivo final generado: mandelbrot_result.txt");
 }

@@ -43,10 +43,13 @@ pub fn run(worker_id: String, coord_addr: String) {
         .read_line(&mut task_line)
         .expect("No se pudo leer TASK");
 
-    println!("TASK recibida: {}", task_line.trim());
-
     let task: TaskMessage =
         serde_json::from_str(task_line.trim()).expect("No se pudo parsear TASK");
+
+    println!(
+        "Procesando filas {}-{} con width={} height={}",
+        task.start_row, task.end_row, task.width, task.height
+    );
 
     let pixels = compute_block(
         task.start_row,
