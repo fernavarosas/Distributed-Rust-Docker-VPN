@@ -1,20 +1,11 @@
 # Inventario de máquinas virtuales
 
-## Host de Fernando
+# Inventario de máquinas virtuales y nodos del proyecto
 
-- coord-01 -> Coordinador
-- worker-01 -> Worker
-- worker-02 -> Worker
-
-## Host de Omar
-
-- worker-03 -> Worker
-- worker-04 -> Worker
-
-## Estado actual
-
-- `coord-01`: instalada y validada
-- `worker-01`: en preparación
-- `worker-02`: en preparación
-- `worker-03`: en preparación
-- `worker-04`: en preparación
+| Nodo      | Host/Propietario | Tipo             | Rol         | ZeroTier | Docker                | Rust      | Estado   |
+| --------- | ---------------- | ---------------- | ----------- | -------- | --------------------- | --------- | -------- |
+| coord-01  | Fernando         | VM Ubuntu Server | Coordinador | Sí       | Sí                    | Pendiente | Activo   |
+| worker-01 | Fernando         | VM Ubuntu Server | Worker      | Sí       | Sí                    | Pendiente | Inactivo |
+| worker-02 | Fernando         | VM Ubuntu Server | Worker      | Sí       | Sí                    | Pendiente | Activo   |
+| omadebian | Omar             | VM Ubuntu Server | Worker      | Sí       | Pendiente/por validar | Pendiente | Activo   |
+| wsl       | Omar             | WSL Ubuntu       | Worker      | Sí       | Pendiente/por validar | Pendiente | Activo   |

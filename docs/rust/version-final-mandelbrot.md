@@ -1,0 +1,27 @@
+# Versión final funcional de Mandelbrot distribuido
+
+## Objetivo
+
+Implementar una versión final funcional del sistema distribuido de Mandelbrot utilizando un coordinador y ocho workers ejecutados dentro de contenedores Docker.
+
+## Configuración final
+
+- Resolución: 800x800
+- Iteraciones máximas: 1000
+- Total de workers: 8
+- Asignación: 100 filas por worker
+
+## Distribución de bloques
+
+- `mandel-worker-01` → filas 0-99
+- `mandel-worker-02` → filas 100-199
+- `mandel-worker-03` → filas 200-299
+- `mandel-worker-04` → filas 300-399
+- `mandel-worker-05` → filas 400-499
+- `mandel-worker-06` → filas 500-599
+- `mandel-worker-07` → filas 600-699
+- `mandel-worker-08` → filas 700-799
+
+## Resultado
+
+El coordinador recibe los ocho bloques, los integra en memoria y genera un archivo final `mandelbrot_result.txt`.

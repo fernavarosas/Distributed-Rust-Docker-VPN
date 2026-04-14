@@ -1,0 +1,35 @@
+# Estructura base del proyecto Rust
+
+## Objetivo
+
+Crear la base del proyecto Rust que implementará el sistema distribuido de Mandelbrot bajo un modelo coordinador-workers.
+
+## Estructura definida
+
+```text
+mandelbrot-distributed/
+├─ Cargo.toml
+└─ src/
+   ├─ main.rs
+   ├─ coordinator.rs
+   ├─ worker.rs
+   ├─ protocol.rs
+   └─ mandelbrot.rs
+```
+
+## Descripción de módulos
+
+- main.rs: selecciona el modo de ejecución (coordinator o worker)
+- coordinator.rs: contendrá la lógica del coordinador
+- worker.rs: contendrá la lógica de los workers
+- protocol.rs: define las estructuras del protocolo JSON
+- mandelbrot.rs: contiene la lógica de cálculo del algoritmo
+
+## Dependencias iniciales
+
+serde
+serde_json
+
+## Resultado
+
+Se dejó creada la base compilable del proyecto Rust distribuido.
