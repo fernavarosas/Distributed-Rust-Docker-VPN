@@ -1,0 +1,95 @@
+Coordinador escuchando en 0.0.0.0:9000
+Nueva conexión recibida
+Mensaje recibido: {"type":"register","worker_id":"mandel-worker-01","host_id":"local-host"}
+Worker registrado: mandel-worker-01 desde host local-host
+ACK enviado
+TASK enviada a mandel-worker-01 para filas 0-99
+Resultado recibido de mandel-worker-01
+Resultado válido de mandel-worker-01 para filas 0-99
+Cantidad de pixeles recibidos: 80000
+Bloques recibidos hasta ahora: 1/8
+Nueva conexión recibida
+Mensaje recibido: {"type":"register","worker_id":"mandel-worker-02","host_id":"local-host"}
+Worker registrado: mandel-worker-02 desde host local-host
+ACK enviado
+TASK enviada a mandel-worker-02 para filas 100-199
+Resultado recibido de mandel-worker-02
+Resultado válido de mandel-worker-02 para filas 100-199
+Cantidad de pixeles recibidos: 80000
+Bloques recibidos hasta ahora: 2/8
+Nueva conexión recibida
+Mensaje recibido: {"type":"register","worker_id":"mandel-worker-03","host_id":"local-host"}
+Worker registrado: mandel-worker-03 desde host local-host
+ACK enviado
+TASK enviada a mandel-worker-03 para filas 200-299
+Resultado recibido de mandel-worker-03
+Resultado válido de mandel-worker-03 para filas 200-299
+Cantidad de pixeles recibidos: 80000
+Bloques recibidos hasta ahora: 3/8
+Nueva conexión recibida
+Mensaje recibido: {"type":"register","worker_id":"mandel-worker-04","host_id":"local-host"}
+Worker registrado: mandel-worker-04 desde host local-host
+ACK enviado
+TASK enviada a mandel-worker-04 para filas 300-399
+Resultado recibido de mandel-worker-04
+Resultado válido de mandel-worker-04 para filas 300-399
+Cantidad de pixeles recibidos: 80000
+Bloques recibidos hasta ahora: 4/8
+Nueva conexión recibida
+Mensaje recibido: {"type":"register","worker_id":"mandel-worker-05","host_id":"local-host"}
+Worker registrado: mandel-worker-05 desde host local-host
+ACK enviado
+TASK enviada a mandel-worker-05 para filas 400-499
+Nueva conexión recibida
+Mensaje recibido: {"type":"register","worker_id":"mandel-worker-06","host_id":"local-host"}
+Worker registrado: mandel-worker-06 desde host local-host
+ACK enviado
+TASK enviada a mandel-worker-06 para filas 500-599
+Nueva conexión recibida
+Mensaje recibido: {"type":"register","worker_id":"mandel-worker-07","host_id":"local-host"}
+Worker registrado: mandel-worker-07 desde host local-host
+ACK enviado
+TASK enviada a mandel-worker-07 para filas 600-699
+Nueva conexión recibida
+Mensaje recibido: {"type":"register","worker_id":"mandel-worker-08","host_id":"local-host"}
+Worker registrado: mandel-worker-08 desde host local-host
+ACK enviado
+TASK enviada a mandel-worker-08 para filas 700-799
+Resultado recibido de mandel-worker-08
+Resultado válido de mandel-worker-08 para filas 700-799
+Cantidad de pixeles recibidos: 80000
+Bloques recibidos hasta ahora: 5/8
+Nueva conexión recibida
+Mensaje recibido: {"type":"register","worker_id":"mandel-worker-07","host_id":"local-host"}
+Worker registrado: mandel-worker-07 desde host local-host
+ACK enviado
+TASK enviada a mandel-worker-07 para filas 600-699
+Nueva conexión recibida
+Mensaje recibido: {"type":"register","worker_id":"mandel-worker-05","host_id":"local-host"}
+Worker registrado: mandel-worker-05 desde host local-host
+ACK enviado
+TASK enviada a mandel-worker-05 para filas 400-499
+Resultado recibido de mandel-worker-05
+Resultado válido de mandel-worker-05 para filas 400-499
+Cantidad de pixeles recibidos: 80000
+Bloques recibidos hasta ahora: 6/8
+Nueva conexión recibida
+Mensaje recibido: {"type":"register","worker_id":"mandel-worker-06","host_id":"local-host"}
+Worker registrado: mandel-worker-06 desde host local-host
+ACK enviado
+TASK enviada a mandel-worker-06 para filas 500-599
+Resultado recibido de mandel-worker-06
+Resultado válido de mandel-worker-06 para filas 500-599
+Cantidad de pixeles recibidos: 80000
+Bloques recibidos hasta ahora: 7/8
+Nueva conexión recibida
+Mensaje recibido: {"type":"register","worker_id":"mandel-worker-07","host_id":"local-host"}
+Worker registrado: mandel-worker-07 desde host local-host
+ACK enviado
+TASK enviada a mandel-worker-07 para filas 600-699
+Resultado recibido de mandel-worker-07
+Resultado válido de mandel-worker-07 para filas 600-699
+Cantidad de pixeles recibidos: 80000
+Bloques recibidos hasta ahora: 8/8
+Todos los bloques fueron recibidos. Integrando resultado final...
+Archivo final generado: mandelbrot_result.txt
