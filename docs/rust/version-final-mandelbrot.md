@@ -38,3 +38,18 @@ Metadatos del resultado:
 - height=800
 - max_iter=1000
 - total_pixels=640000
+
+## Evidencias
+
+### Log del coordinador mostrando 8 de 8 bloques recibidos:
+
+![Log del coordinador mostrando 8 de 8 bloques recibidos 1](../assets/img/logs_coordinador_1.png)
+![Log del coordinador mostrando 8 de 8 bloques recibidos 2](../assets/img/logs_coordinador_2.png)
+
+### Log más ordenado:
+
+![Log del coordinador mas ordenado](../assets/img/logs_coordinador_ordenados.png)
+
+### Total de pixeles generados:
+
+![Total de pixeles generados](../assets/img/total_pixels.png)
