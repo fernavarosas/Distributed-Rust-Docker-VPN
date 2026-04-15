@@ -27,6 +27,10 @@ Construir y documentar una infraestructura distribuida real que permita:
 
 ## Arquitectura final
 
+## Topología del sistema
+
+![Topología del proyecto](./assets/img/Topologia.png)
+
 ### Hosts utilizados
 
 - `coord-01`
